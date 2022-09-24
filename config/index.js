@@ -4,7 +4,10 @@ dotenv.config();
 
 export const {
 
-    APP_PORT
+    APP_PORT,
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_NAME
 
 } = process.env
 

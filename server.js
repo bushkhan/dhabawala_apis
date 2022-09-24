@@ -1,11 +1,11 @@
 import express from 'express';
-import { APP_PORT } from './config';
+import { APP_PORT, DB_NAME, DB_PASSWORD,DB_USERNAME } from './config';
 import path from 'path';
 const app = express();
 
 import routes from './routes/index.js'
 import mongoose from "mongoose";
-const DB_URL = "mongodb+srv://Bushra:bushra123@cluster0.47apsm5.mongodb.net/dhabawala?retryWrites=true&w=majority";
+const DB_URL = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.47apsm5.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
 mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true});
 
 
