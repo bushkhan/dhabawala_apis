@@ -21,6 +21,8 @@ app.use(express.urlencoded({ extended: false}));
 
 app.use('/api',routes);
 
+app.use('/menuImages',express.static('menuImages'));
+
 app.listen(APP_PORT,()=>{
     console.log(`Listening on port ${APP_PORT}`);
 });

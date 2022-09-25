@@ -8,6 +8,8 @@ router.post('/register', registerController.register);
 
 router.post('/dhabas', dhabaController.store);
 
+router.get('/dhabas', dhabaController.index);
 
+router.get('/dhabas/:id', dhabaController.show);
 
 export default router

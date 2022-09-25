@@ -33,7 +33,7 @@ const dhabaController = {
             if (err) {
                 return next(CustomErrorHandler.serverError(err.message));
             }
-            const filePath = req.file.path;
+            const filePath = req.file.path.replace("\\","/");
 
             const dhabaSchema = Joi.object(
                 {
@@ -45,7 +45,7 @@ const dhabaController = {
                     topDishes: Joi.string().required(),
                     location: Joi.string().required(),
                     address: Joi.string().required(),
-
+                    overview: Joi.string().required(),
                 }
             );
 
@@ -60,7 +60,7 @@ const dhabaController = {
                 return next(error);
 
             }
-            const { name, contact, noOfTables,type, rating, topDishes, location, address } = req.body;
+            const { name, contact, noOfTables,type, rating, topDishes, location, address, overview } = req.body;
 
             let document;
 
@@ -74,6 +74,7 @@ const dhabaController = {
                     topDishes,
                     location,
                     address,
+                    overview,
                     menuImage: filePath
                 })
             } catch (error) {
@@ -82,7 +83,29 @@ const dhabaController = {
 
             res.status(201).json(document);
         });
+    },
+
+
+    async index(req, res, next){
+        let documents;
+        try {
+            documents = await Dhaba.find().select('-updatedAt -__v').sort({ _id: -1});
+
+        } catch (error) {
+           return next(CustomErrorHandler.serverError());
+        }
+        res.json(documents);
+    },
+
+    async show(req,res,next){
+        let document;
+        document = await Dhaba.findOne({ _id: req.params.id }).select('-updatedAt -__v');
+        try {
+            
+        } catch (error) {
+            return next(CustomErrorHandler.serverError());            
+        }
+        return res.json(document);
     }
 }
-
 export default dhabaController;

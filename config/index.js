@@ -7,7 +7,8 @@ export const {
     APP_PORT,
     DB_USERNAME,
     DB_PASSWORD,
-    DB_NAME
+    DB_NAME,
+    APP_URL
 
 } = process.env
 
